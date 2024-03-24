@@ -91,3 +91,30 @@ class UIController:
 
         trucks.print_all_values()
         drivers.print_all_values()
+
+        # Loop continues as long as there are packages left to deliver
+        while delivery_manager.ath_packages_to_deliver(trucks) > 0:
+            # Inform the user of the total number of packages still to be delivered
+            print("You still have " + str(delivery_manager.ath_packages_to_deliver(trucks)) + " packages to deliver.")
+
+            # Iterate through each truck by their ID (assumed range 1 to 3)
+            for truck in range(1, 4):
+                # Get the number of packages currently assigned to the truck
+                num_packages = len(trucks.search(truck).delivery_list)
+                # Print the current status of the truck (ready or not ready)
+                print(trucks.search(truck).truck_status)
+
+                # If the truck has packages and is marked as ready
+                if num_packages > 0 and trucks.search(truck).truck_status:
+                    # Inform the user of the number of packages to deliver and truck readiness
+                    print("Truck " + str(truck) + " has " + str(num_packages) + " packages to deliver.")
+                    print("Truck " + str(truck) + " is ready to depart.")
+                # If the truck has packages but is not marked as ready
+                elif num_packages > 0 and not trucks.search(truck).truck_status:
+                    # Inform the user of the number of packages to deliver and truck's unavailability
+                    print("Truck " + str(truck) + " has " + str(num_packages) + " packages to deliver.")
+                    print("Truck " + str(truck) + " is not ready to depart.")
+
+                # Wait for the user input to continue, ensuring they have time to read the status
+                input("Hit any key to continue")
+
