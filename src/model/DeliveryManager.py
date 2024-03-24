@@ -392,6 +392,17 @@ class DeliveryManager:
         pass
 
     @staticmethod
+    def ath_packages_to_deliver(truck_cht: ChainingHashTable):
+        """
+        Procedure to check if there are packages At The Hub that still need to be delivered
+        :return: Number of packages at the hub that still need to be delivered
+        """
+        remaining_packages_ATH = 0  # Number of packages at the hub that still need to be delivered
+        for truck in range(1, 4):
+            remaining_packages_ATH += len(truck_cht.search(truck).delivery_list)
+        return int(remaining_packages_ATH)
+
+    @staticmethod
     def assign_driver_to_truck(driver_id, truck_id, drivers, trucks):
         """
         Method to assign a driver to a truck

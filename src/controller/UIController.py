@@ -83,11 +83,48 @@ class UIController:
         # location_table.print_all_values()
         # location_id.get_all()
         # print(all_packages.search(30))
+
+        #  Assign trucks and drivers
         delivery_manager.assign_driver_to_truck(1, 1, drivers, trucks)
         delivery_manager.assign_driver_to_truck(2, 2, drivers, trucks)
         trucks.print_all_values()
-        drivers.print_all_values()
-        delivery_manager.unassign_driver_from_truck(1, 1, drivers, trucks)
+        # drivers.print_all_values()
+        # delivery_manager.unassign_driver_from_truck(1, 1, drivers, trucks)
 
-        trucks.print_all_values()
-        drivers.print_all_values()
+        # trucks.print_all_values()
+        # drivers.print_all_values()
+
+        print("Packages ATH to Deliver: " + str(delivery_manager.ath_packages_to_deliver(trucks)))
+        # This while statement checks if there are any trucks that have packages to deliver.
+        #
+        # Loop continues as long as there are packages left to deliver
+        while delivery_manager.ath_packages_to_deliver(trucks) > 0:
+            # Inform the user of the total number of packages still to be delivered
+            print("You still have " + str(delivery_manager.ath_packages_to_deliver(trucks)) + " packages to deliver.")
+
+            # Iterate through each truck by their ID (assumed range 1 to 3)
+            for truck in range(1, 4):
+                # Get the number of packages currently assigned to the truck
+                num_packages = len(trucks.search(truck).delivery_list)
+                # Print the current status of the truck (ready or not ready)
+                print(trucks.search(truck).truck_status)
+
+                # If the truck has packages and is marked as ready
+                if num_packages > 0 and trucks.search(truck).truck_status:
+                    # Inform the user of the number of packages to deliver and truck readiness
+                    print("Truck " + str(truck) + " has " + str(num_packages) + " packages to deliver.")
+                    print("Truck " + str(truck) + " is ready to depart.")
+                # If the truck has packages but is not marked as ready
+                elif num_packages > 0 and not trucks.search(truck).truck_status:
+                    # Inform the user of the number of packages to deliver and truck's unavailability
+                    print("Truck " + str(truck) + " has " + str(num_packages) + " packages to deliver.")
+                    print("Truck " + str(truck) + " is not ready to depart.")
+
+                # Wait for the user input to continue, ensuring they have time to read the status
+                input("Hit any key to continue")
+
+        # TODO - Address the fact that packages 6, 26, 29, 33 do not arrive until 9:05 AM. Thus, before 09:05AM it needs to show that the package is at the hub and that the arrival time is None.
+        #  After 09:05AM, the package should show that it is in transit to the delivery location.
+
+        # TODO - Address the fact that package 9 has the wrong address until 10:20 AM. The address should be corrected at 10:20 AM. Before 10:20 it should show the wrong address.
+        #  After 10:20 AM it should show the correct address.
