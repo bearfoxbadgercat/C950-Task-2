@@ -386,6 +386,7 @@ class DeliveryManager:
         DeliveryManager.set_package_distances(package_cht, distance_table_cht)  # Set up package distances
         DeliveryManager.load_packages_special_notes(package_cht, truck_cht)
         DeliveryManager.load_packages_standard(package_cht, truck_cht)
+
     @staticmethod
     def change_driver_status():
         pass
@@ -419,5 +420,3 @@ class DeliveryManager:
         drivers.search(driver_id).assigned_truck = None
         trucks.search(truck_id).truck_status = False
         drivers.search(driver_id).status_active = False
-
-
