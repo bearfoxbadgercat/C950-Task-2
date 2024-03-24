@@ -117,4 +117,3 @@ class UIController:
 
                 # Wait for the user input to continue, ensuring they have time to read the status
                 input("Hit any key to continue")
-
