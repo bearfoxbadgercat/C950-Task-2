@@ -36,16 +36,13 @@ class ChainingHashTable:
                 return True  # Key removed successfully
         return False  # Key not found
 
-    # Method to print the hash table
-    def print_table(self):
-        for i, bucket in enumerate(self.table):
-            print(f"Bucket {i}: {bucket}")
-
     def print_table_values(self):
         packages = []
         for bucket in self.table:
-               for k,v in bucket:
-                   packages.append(v)
+            for k, v in bucket:
+                packages.append(v)
+        # Sort by an attribute of the objects, e.g., 'id'
+        packages.sort(key=lambda x: x.package_id)  # Replace 'id' with the actual attribute you want to sort by
         for p in packages:
             print(f"{p}")
 
@@ -56,14 +53,6 @@ class ChainingHashTable:
             if k == key:
                 return v
         return None  # Key not found
-
-    # Method to return key based on value
-    def get_key(self, value):
-        for bucket in self.table:
-            for k, v in bucket:
-                if v == value:
-                    return k
-        return None  # Value not found
 
     def get_all(self):
         all_values = []
@@ -80,15 +69,3 @@ class ChainingHashTable:
                 print(f"{v}")
                 all_values.append((k, v))
         return all_values
-
-    def get_nested_value(self, outer_key, inner_key):
-        outer_index = self.hash_function(outer_key)
-        for k, inner_table in self.table[outer_index]:
-            if k == outer_key:
-                for inner_k, v in inner_table:
-                    if inner_k == inner_key:
-                        return v
-        return None  # Either outer or inner key not found
-
-    # Method to print value as a string
-

@@ -15,8 +15,10 @@ class Driver:
         self.assigned_truck = assigned_truck  # Set in program
 
     def __str__(self):
-        """
-        Method to return a string representation of the Driver object
-        :return: string representation of the Driver object
-        """
-        return f"Driver: {self.driver_id}, {self.status_active}, {self.assigned_truck}"
+        return (
+            f"Driver Information Card\n"
+            f"------------------------\n"
+            f"Driver ID: {self.driver_id}\n"
+            f"Status: {'Active' if self.status_active else 'Inactive'}\n"
+            f"Assigned Truck: {self.assigned_truck}\n"
+        )

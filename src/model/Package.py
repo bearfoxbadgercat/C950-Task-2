@@ -13,7 +13,7 @@ class Package:
         :param city:
         :param state:
         :param zip_code:
-        :param deadline:
+        :param deadline: time the package needs to be delivered by
         :param weight:
         :param notes:
         :param status:
@@ -41,8 +41,30 @@ class Package:
         self.truck = truck  # Set in program
         self.delivery_location_id = delivery_location_id  # Method stated
         self.time_left = time_left  # Method stated
-        self.distance_to_delivery = distance_to_delivery  # Method stated
+        self.distance = distance_to_delivery  # Method stated
         self.minute_per_mile = minute_per_mile  # Method stated
+
+    # def __str__(self):
+    #     """
+    #     Method to return a string representation of the Packages object
+    #     :return: string representation of the Packages object
+    #     """
+    #     return (
+    #         f"+-----------------------------------------+\n"
+    #         f"| Package ID: {self.package_id}\n"
+    #         f"| Delivery Location ID: {self.delivery_location_id}\n"
+    #         f"| Address: {self.address}  {self.city}, {self.state} {self.zip_code}\n"
+    #         f"| Weight: {self.weight}\n"
+    #         f"| Notes: {self.notes}\n|\n"
+    #
+    #         f"| Status: {self.status}\n|\n"
+    #                     f"| Time at Hub: {self.time_at_hub}   Time En Route: {self.time_en_route}       Time Delivered: {self.time_delivered}\n|\n"
+    #         f"| Deadline: {self.deadline}       Time Left: {self.time_left}       Dist. to Delivery: {self.distance}\n"
+    #
+    #         f"| Assigned Truck: {self.truck}\n"
+    #         f"| Min/Mile: {self.minute_per_mile}\n"
+    #         f"+-----------------------------------------+\n"
+    #     )
 
     def __str__(self):
         """
@@ -50,20 +72,13 @@ class Package:
         :return: string representation of the Packages object
         """
         return (
-            f"+-----------------------------------------+\n"
-            f"| Package ID: {self.package_id}\n"
-            f"| Delivery Location ID: {self.delivery_location_id}\n"
-            f"| Address: {self.address}  {self.city}, {self.state} {self.zip_code}\n"
-            f"| Weight: {self.weight}\n"
-            f"| Notes: {self.notes}\n|\n"
-             
-            f"| Status: {self.status}\n|\n"
-                        f"| Time at Hub: {self.time_at_hub}   Time En Route: {self.time_en_route}       Time Delivered: {self.time_delivered}\n|\n"
-            f"| Deadline: {self.deadline}       Time Left: {self.time_left} mins      Dist. to Delivery: {self.distance_to_delivery}\n"
-
-            f"| Assigned Truck: {self.truck}\n"
-            f"| Min/Mile: {self.minute_per_mile}\n"
-            f"+-----------------------------------------+\n"
+            f"{self.package_id:2} | "
+            f"{self.address[:35]:35} |{self.city[:15]:15} |{self.zip_code:8} | "
+            f"{self.weight:7} | "
+            f"{self.status:10} | "
+            f"{self.time_delivered:} | "
+            f"{self.deadline:} | "
+            f"{self.truck:2} | "
         )
 
     def set_delivery_location_id(self):

@@ -1,3 +1,8 @@
+# Main.py
+# Student ID: 001084095
+# Author: Michael Castro
+# Course: C950 Data Structures and Algorithms II
+# Description: Task 2 - WGUPS Package Routing Program
 from src.view import ui
 
 

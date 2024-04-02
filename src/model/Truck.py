@@ -6,9 +6,10 @@ class Truck:
     """
     Constructor for the Truck class
     """
+    delivery_list: list
 
     def __init__(self, truck_id, truck_driver, truck_location, truck_status, truck_mileage, delivery_list,
-                 departure_time: datetime.time = None, current_time: datetime.time = None, speed=18.0):
+                 departure_time: datetime.time, current_time: datetime.time, return_time, speed=18.0):
         self.truck_id = truck_id  # Set in program
         self.truck_driver = truck_driver  # Set in program
         self.truck_location = truck_location  # Set in program
@@ -17,6 +18,7 @@ class Truck:
         self.delivery_list = delivery_list  # Set in program
         self.departure_time = departure_time  # Set in program
         self.current_time = current_time  # TODO Add Method
+        self.return_time = return_time  # Set in program #TODO I need to update information
         self.speed = speed  # Speed set in program
 
     # Method to calculate the mileage
@@ -38,5 +40,6 @@ class Truck:
                 f"Delivery List: {self.delivery_list}        Total Packages: {len(self.delivery_list)}\n"
                 f"Departure Time: {self.departure_time}\n"
                 f"Current Time: {self.current_time}\n"
+                f"Return Time: {self.return_time}\n"
                 f"Speed: {self.speed} miles/minute\n"
                 f"+-----------------------------------------+")

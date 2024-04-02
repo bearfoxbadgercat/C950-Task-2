@@ -1,5 +1,5 @@
-from src.model.ChainingHashtable import ChainingHashTable
-from src.model.DeliveryManager import DeliveryManager
+from src.model.NewDeliveryManager import NewDeliveryManager
+from datetime import datetime
 
 
 class UIController:
@@ -8,7 +8,6 @@ class UIController:
         Constructor for the UIController
         :return: None
         """
-        pass
 
     @staticmethod
     def option_1():
@@ -16,22 +15,42 @@ class UIController:
         Method for handling option 1
         :return: None
         """
-        print("Option 1 selected")
-        # TODO Add code to handle option 1
-        pass
+        dm = NewDeliveryManager()
+        dm.setup_delivery_environment()
+        dm.deliver_packages()
 
-    # write remaining options through 5
+        # Let's print the total distance traveled by all trucks
+        t1_miles = dm.trucks[1].truck_mileage
+        t2_miles = dm.trucks[2].truck_mileage
+        t3_miles = dm.trucks[3].truck_mileage
+        total_miles = t1_miles + t2_miles + t3_miles
+        input("\n\n\nDelivering all packages. Press Enter to continue...")
+        input("\nDeliveries Complete.")
+        input(f"\nTotal miles traveled by all trucks: {total_miles}")
+        input("\n\n\nPress Enter to view all packages...")
+        print(f"{' ' * 92}Time")
+        print(f"ID | Address{' ' * 29}| "f"City{' ' * 11}|Zip Code | Weight  |Status      |Delivered |Deadline  |Truck")
+        print(
+            "---|-------------------------------------|----------------|---------|---------|------------|----------|----------|-----")
+
+        dm.all_packages.print_all_values()
+        input("\nPress Enter to return to the menu.\n")
+
     @staticmethod
     def option_2():
         """
         Method for handling option 2
         :return:
         """
-        print("Option 2 selected")
-        # Hit any key to continue
-        input("Hit any key to continue")
-        # TODO Add code to handle option 2
-        pass
+        dm = NewDeliveryManager()
+        dm.setup_delivery_environment()
+        userinput_id = int(input("Enter the package ID: "))
+        print(type(userinput_id))
+        print(dm.all_packages.search(userinput_id).package_id, dm.all_packages.search(userinput_id).address,
+              dm.all_packages.search(userinput_id).city, dm.all_packages.search(userinput_id).zip_code,
+              dm.all_packages.search(userinput_id).weight, dm.all_packages.search(userinput_id).status,
+              dm.all_packages.search(userinput_id).time_delivered, dm.all_packages.search(userinput_id).deadline,
+              dm.all_packages.search(userinput_id).truck)
 
     @staticmethod
     def option_3():
@@ -56,69 +75,3 @@ class UIController:
             exit()
         else:
             print("Returning to the menu.")
-
-    @staticmethod
-    def option_5():
-        """
-        This is only for testing purposes
-        :return: None
-        """
-
-        # Initiate the Delivery Manager
-        delivery_manager = DeliveryManager()
-
-        # Step 1: Create WGUPS Environment
-
-        # Declare empty hash tables using the ChainingHashTable class
-        drivers = ChainingHashTable(2)  # Drivers
-        trucks = ChainingHashTable(3)  # Trucks
-        all_packages = ChainingHashTable(40)  # Packages
-        distance_table = ChainingHashTable(27)  # Location Table
-        location_id = ChainingHashTable(27)  # Location ID
-
-        # Set up the WGUPS environment
-        delivery_manager.setup_environment(drivers, trucks, all_packages, distance_table, location_id, distance_table)
-
-        # all_packages.print_all_values()
-        # location_table.print_all_values()
-        # location_id.get_all()
-        # print(all_packages.search(30))
-        delivery_manager.assign_driver_to_truck(1, 1, drivers, trucks)
-        delivery_manager.assign_driver_to_truck(2, 2, drivers, trucks)
-        trucks.print_all_values()
-        drivers.print_all_values()
-
-        trucks.print_all_values()
-        drivers.print_all_values()
-
-        # Loop continues as long as there are packages left to deliver
-        while delivery_manager.ath_packages_to_deliver(trucks) > 0:
-            # Inform the user of the total number of packages still to be delivered
-            print("\nYou still have " + str(
-                delivery_manager.ath_packages_to_deliver(trucks)) + " packages undelivered.\n")
-            input("Hit any key to continue")
-
-            # Iterate through each truck by their ID (assumed range 1 to 3)
-            for truck in range(1, 4):
-                # Get the number of packages currently assigned to the truck
-                num_packages = len(trucks.search(truck).delivery_list)
-                # Print the current status of the truck (ready or not ready)
-
-                # If the truck has packages and is marked as ready
-                if num_packages > 0 and trucks.search(truck).truck_status:
-                    # Inform the user of the number of packages to deliver and truck readiness
-                    print("Truck " + str(truck) + " has " + str(num_packages) + " packages to deliver.")
-                    input("")
-                    print("Truck " + str(truck) + " is ready to depart.")
-                    input("")
-
-                # If the truck has packages but is not marked as ready
-                elif num_packages > 0 and not trucks.search(truck).truck_status:
-                    # Inform the user of the number of packages to deliver and truck's unavailability
-                    print("Truck " + str(truck) + " has " + str(num_packages) + " packages to deliver.")
-                    input("")
-                    print("Truck " + str(truck) + " is not ready to depart.")
-                    input("")
-
-                # Wait for the user input to continue, ensuring they have time to read the status
-                # input("Hit any key to continue")

@@ -20,14 +20,13 @@ def load_menu():
     :return: The user's choice
     """
     print("Menu Options:")
-    print("1. Option 1")
-    print("2. Option 2")
-    print("3. Option 3")
-    print("4. Exit Program")
+    print("1. Deliver All Packages")
+    print("2. Look Up Package at Specific Time")
+    print("3. Exit Program")
 
     while True:
         choice = input("\nEnter your choice: ")
-        if choice in ("1", "2", "3", "4", "5"):
+        if choice in ("1", "2", "3"):
             return choice
         else:
             print("Invalid choice. Please select a valid option.")
@@ -46,11 +45,8 @@ def process_choice(choice):
     elif choice == "2":
         controller.option_2()
     elif choice == "3":
-        controller.option_3()
-    elif choice == "4":
         controller.exit_program()
-    elif choice == "5":
-        controller.option_5()
+
     else:
         print("Invalid choice. Please select a1 valid option.")
 
